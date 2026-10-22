@@ -4,14 +4,16 @@
 Developed during SDAIA Academy's Generative AI Solutions Development Program
 ([github.com/SDAIAAcademy](https://github.com/SDAIAAcademy)).
 
+- 🌐 **Live Demo:** [https://dealguard-a7k8.onrender.com/](https://dealguard-a7k8.onrender.com/)  
+  *(Hosted on Render free tier. May take 30–60 seconds to spin up on initial load after inactivity.)*
+- 💻 **GitHub Repository:** [https://github.com/Thamer-99/DealGuard](https://github.com/Thamer-99/DealGuard)
+- 📋 **Presentation Material for Team:** [PRESENTATION_HANDOFF.md](PRESENTATION_HANDOFF.md)
+
 > **Synthetic data only.** All policies, coupon codes and offers are fictional. No real merchants or offers are involved.
 
 > **Transparency notice.** By default DealGuard uses TF-IDF *retrieval*, deterministic Python rules and a *template* explanation (no LLM).
-> If `GEMINI_API_KEY` is set, Gemini may **reword** the already-verified result; it never calculates prices or decides eligibility.
-> The UI labels every explanation as *template-generated* or *LLM-generated*. The Gemini path is covered by mocked tests only;
-> a live Gemini request has **not** been verified in this repository.
-
-Presentation material for the team: [PRESENTATION_HANDOFF.md](PRESENTATION_HANDOFF.md)
+> If `GEMINI_API_KEY` is set in the environment, Gemini may **reword** the already-verified result; it never calculates prices or decides eligibility. Without an API key, Gemini generation remains optional and inactive, automatically defaulting to safe deterministic template explanations (as seen on the live demo).
+> The UI clearly labels every explanation as *template-generated* or *LLM-generated*. The Gemini path is covered by mocked tests.
 
 ## Objectives
 - Demonstrate a grounded, auditable pipeline: every verdict cites the policy it came from.
@@ -97,18 +99,25 @@ python -m unittest -v
 Last verified result: `Ran 25 tests ... OK` (Python 3.13, Windows).
 Note: policies are valid until 2026-12-31 and `FLASH50` expired 2026-01-31. `test_dealguard.py` uses a fixed date; two web-layer tests in `test_llm.py` use today's date and assume `SAVE20` is still valid.
 
-## Optional deployment (Render free plan)
-Not deployed yet - no public URL exists. To deploy:
-1. Push this repository to GitHub (done for `main`).
-2. In Render: **New > Blueprint**, select the repo; `render.yaml` creates a free web service
-   (`python app_web.py`, no packages installed, health check `/healthz`).
-3. Render sets `PORT` and `RENDER_EXTERNAL_HOSTNAME`; `render.yaml` sets `DEALGUARD_HOST=0.0.0.0`.
-4. Optionally add `GEMINI_API_KEY` as a secret in the Render dashboard (leave empty for template mode).
+## Live Deployment (Render free plan)
+DealGuard is publicly deployed and verified at:
+👉 **[https://dealguard-a7k8.onrender.com/](https://dealguard-a7k8.onrender.com/)**
+
+> **Note on Render Free Tier:** Render spins down free web services after a period of inactivity. If visiting after some idle time, please allow 30–60 seconds for the service to wake up.
+>
+> **Note on Gemini Generation:** The live deployment runs in standard deterministic mode (template explanations) because no `GEMINI_API_KEY` is configured in production. If a key is added to Render's environment variables, the guarded LLM explanation layer activates automatically without code changes.
+
+To deploy your own instance:
+1. Fork or push this repository to GitHub.
+2. In Render: **New > Blueprint**, select the repo; `render.yaml` automatically sets up the service
+   (`python app_web.py`, standard library only, health check at `/healthz`).
+3. Render provides `PORT` and `RENDER_EXTERNAL_HOSTNAME`; `render.yaml` sets `DEALGUARD_HOST=0.0.0.0`.
+4. Optionally add `GEMINI_API_KEY` as a secret environment variable in Render's dashboard.
 
 | Variable | Default | Purpose |
 |---|---|---|
-| `PORT` | `8765` | Listening port (CLI argument wins) |
-| `DEALGUARD_HOST` | `127.0.0.1` | Bind address; `0.0.0.0` only on a hosting provider |
+| `PORT` | `8765` | Listening port (assigned automatically by Render) |
+| `DEALGUARD_HOST` | `127.0.0.1` | Bind address (`0.0.0.0` on Render) |
 | `DEALGUARD_ALLOWED_HOSTS` | - | Extra public hostnames accepted in the `Host` header |
 | `GEMINI_API_KEY` / `GEMINI_MODEL` | - / `gemini-2.5-flash` | Optional LLM explanations |
 

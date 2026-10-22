@@ -3,9 +3,10 @@
 Content for the teammate building the slides with the team template. Everything here matches the actual code in this repository.
 **Implemented** = works today. **Optional** = in the code but needs a user-supplied API key. **Future** = not built.
 
-- Repository: https://github.com/Thamer-99/DealGuard
-- Screenshot: https://github.com/Thamer-99/DealGuard/blob/main/screenshots/dealguard-demo.png
-- Program: SDAIA Academy - Generative AI Solutions Development Program (https://github.com/SDAIAAcademy)
+- 🌐 **Live Demo:** https://dealguard-a7k8.onrender.com/ *(Hosted on Render free tier; may take 30–60s to wake up after inactivity. Runs in deterministic template mode without API key.)*
+- 💻 **Repository:** https://github.com/Thamer-99/DealGuard
+- 🖼️ **Screenshot:** https://github.com/Thamer-99/DealGuard/blob/main/screenshots/dealguard-demo.png
+- 🎓 **Program:** SDAIA Academy - Generative AI Solutions Development Program (https://github.com/SDAIAAcademy)
 
 ## 1. Elevator pitch
 DealGuard checks whether a promotional claim (e.g. "20% off everything!") is true for a specific product. It retrieves the governing policy, applies the rules in deterministic code, calculates the real discount and final price, warns about misleading claims and cites its sources.
@@ -27,9 +28,9 @@ Ads hide exclusions, discount caps, minimum spends and expiry dates. Shoppers an
 | TF-IDF + cosine similarity (hand-written) | Retrieves relevant policy texts (the "R" in RAG) | Implemented |
 | Rule engine in Python | Expiry, category, minimum-spend checks, discount maths | Implemented |
 | HTML/CSS/JavaScript | Responsive single-page UI, all output HTML-escaped | Implemented |
-| Google Gemini REST API (`urllib`) | Natural-language rewording of verified results | Optional (needs key); mocked tests only, live call not verified |
+| Google Gemini REST API (`urllib`) | Natural-language rewording of verified results | Optional (needs key); mocked tests only, inactive on live demo |
 | Gradio | Alternative UI | Optional (blocked on the dev laptop by Windows Application Control) |
-| Render (free plan) | Public hosting via `render.yaml` | Prepared, **not deployed** |
+| Render (free plan) | Public hosting via `render.yaml` | **Deployed & live** at https://dealguard-a7k8.onrender.com/ |
 
 ## 5. Architecture (simple)
 ```
@@ -46,8 +47,9 @@ User input -> Validation -> TF-IDF Retrieval -> Policy Lookup -> Rule Verificati
 6. **Claim check:** reads the "%" or "SAR" amount from the claim and warns if it is larger than the real discount.
 7. **Explanation:** template text by default. With `GEMINI_API_KEY` set, Gemini rewords the result and the grounding guard accepts or rejects its output.
 
-## 7. Live demo (verified on the local server)
-Run `python app_web.py` and open http://127.0.0.1:8765
+## 7. Live demo (verified on live Render deployment & local server)
+- **Live URL:** https://dealguard-a7k8.onrender.com/ *(allow 30-60s if waking from idle)*
+- **Local:** Run `python app_web.py` and open http://127.0.0.1:8765
 
 | Step | Input | Expected result |
 |---|---|---|
@@ -74,18 +76,18 @@ Tip: the form starts on *Electronics*, so for step A switch the category to *Fas
 - 8 fictional policies, single item, no coupon stacking, taxes or shipping fees.
 - TF-IDF is keyword-based (no semantic understanding).
 - Live Gemini generation has not been tested (no key was available). Only mocked tests exist.
-- Demo-grade server, no rate limiting. Not publicly deployed.
+- Public deployment runs on Render's free tier (spins down on inactivity, ~30–60s cold start). Without `GEMINI_API_KEY`, it runs purely in deterministic template mode.
 
 ## 11. Future improvements
 - Semantic embeddings for retrieval; Arabic-language policies and claims.
 - Live, evaluated Gemini explanations; Arabic explanations.
 - Multi-item carts, coupon stacking rules, VAT.
-- Real policy ingestion (PDF/HTML) with versioning; public deployment with rate limiting.
+- Real policy ingestion (PDF/HTML) with versioning; production scaling with custom domain and rate limiting.
 
 ## 12. Suggested five slides (content only)
 1. **DealGuard - Verify the Deal, Not the Ad.** Problem: hidden caps, exclusions and expiry. One-line pitch. SDAIA Academy attribution.
 2. **How It Works.** Flow diagram (section 5). Key message: "AI retrieves and explains, Python decides and calculates."
-3. **Live Demo: SAVE20.** Screenshot. Scenario A: the claim says 20% (200 SAR), the real discount is 150 SAR, final price 850 SAR, cited `DEAL-SAVE20`.
+3. **Live Demo: SAVE20.** Screenshot / Live Link. Scenario A: the claim says 20% (200 SAR), the real discount is 150 SAR, final price 850 SAR, cited `DEAL-SAVE20`.
 4. **Trust & Safety.** Safe refusal, source citations, input validation, guarded optional LLM, 25 passing tests.
 5. **Limitations & Next Steps.** Section 10 and the top 3 items of section 11. Repo link and QR code.
 
@@ -94,4 +96,4 @@ Tip: the form starts on *Electronics*, so for step A switch the category to *Fas
 2. **طريقة العمل:** "النظام يسترجع السياسة المناسبة باستخدام TF-IDF، وبعدها كود Python يطبق الشروط ويحسب الخصم بدقة. الذكاء الاصطناعي ما يحسب الأسعار أبداً."
 3. **العرض الحي:** "منتج أزياء بـ1000 ريال مع كود SAVE20. الإعلان يوحي بخصم 200 ريال، لكن السياسة تحدد الحد الأعلى بـ150، فالسعر النهائي 850 ريال، والنظام ينبهنا أن الإعلان مضلل ويذكر المصدر DEAL-SAVE20."
 4. **الأمان:** "إذا الكود غير موجود، النظام يرفض بدل ما يخترع سياسة. وأي شرح من Gemini يمر على فحص يتأكد أنه ما أضاف أرقام جديدة ويذكر المصدر. وعندنا 25 اختبار ناجح."
-5. **الخاتمة:** "البيانات تجريبية بالكامل، وربط Gemini اختياري ولم يُختبر مباشرة بعد. الخطوات القادمة: دعم اللغة العربية، والبحث الدلالي، والنشر العام. تم تطويره ضمن برنامج تطوير حلول الذكاء الاصطناعي التوليدي في أكاديمية سدايا."
+5. **الخاتمة:** "البيانات تجريبية بالكامل، والتطبيق منشور ويعمل سحابياً للتجربة الحية، وربط Gemini يظل اختيارياً. الخطوات القادمة: دعم اللغة العربية والبحث الدلالي. تم تطويره ضمن برنامج تطوير حلول الذكاء الاصطناعي التوليدي في أكاديمية سدايا."
