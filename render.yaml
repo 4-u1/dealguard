@@ -1,0 +1,18 @@
+# Optional Render blueprint (free plan). The app uses only the Python standard library,
+# so no packages are installed (requirements.txt is only for the optional Gradio UI).
+services:
+  - type: web
+    name: dealguard
+    runtime: python
+    plan: free
+    buildCommand: python --version
+    startCommand: python app_web.py
+    healthCheckPath: /healthz
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.12.7
+      - key: DEALGUARD_HOST
+        value: 0.0.0.0
+      # Optional: set in the Render dashboard only (never commit). Leave empty for template mode.
+      - key: GEMINI_API_KEY
+        sync: false
