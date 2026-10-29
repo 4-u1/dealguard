@@ -8,6 +8,7 @@ Developed during SDAIA Academy's Generative AI Solutions Development Program
   *(Hosted on Render free tier. May take 30–60 seconds to spin up on initial load after inactivity.)*
 - 💻 **GitHub Repository:** [https://github.com/Thamer-99/DealGuard](https://github.com/Thamer-99/DealGuard)
 - 📋 **Presentation Material for Team:** [PRESENTATION_HANDOFF.md](PRESENTATION_HANDOFF.md)
+- 🎞 **Slides (Group 1):** [https://4-u1.github.io/dealguard/slides/](https://4-u1.github.io/dealguard/slides/) · source [`docs/slides/index.html`](docs/slides/index.html)
 
 > **Synthetic data only.** All policies, coupon codes and offers are fictional. No real merchants or offers are involved.
 

@@ -1,0 +1,455 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>DealGuard · Group 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@500;600;700;800&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: a 1280×720 right-to-left stage scaled to the viewport; one committed midnight look with faceted shards, glass cards and a gradient accent rule. */
+:root{
+  --night:#0A1128; --night2:#0F1A3D; --ink:#F3F5FA; --soft:#C3CCE0; --dim:#8D98B3; --line:rgba(255,255,255,.10); --glass:rgba(255,255,255,.045); --glass2:rgba(255,255,255,.075);
+  --teal:#2CC6AA; --orange:#F5873A; --amber:#F7B24A; --purple:#7C6CF2; --blue:#4C8DFF; --green:#35D08F; --rose:#F06C7E;
+  --grad:linear-gradient(90deg,#F5873A 0%,#F7B24A 28%,#35D08F 55%,#4C8DFF 78%,#7C6CF2 100%);
+  --frame:#050A18; --frame-line:#1B2645;
+  --f-display:'Noto Kufi Arabic','IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;
+  --f-body:'IBM Plex Sans Arabic',Tahoma,Arial,sans-serif;
+  --f-mono:'IBM Plex Mono',ui-monospace,Menlo,Consolas,monospace;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0}
+body{background:var(--frame);color:var(--ink);font-family:var(--f-body);overflow:hidden}
+.app{height:100%;display:flex;flex-direction:column}
+.viewport{flex:1;position:relative;min-height:0;overflow:hidden}
+.stage{position:absolute;left:50%;top:50%;width:1280px;height:720px;transform-origin:center center}
+.slide{position:absolute;inset:0;display:none;flex-direction:column;gap:16px;padding:104px 72px 70px;overflow:hidden;
+  background:radial-gradient(1100px 600px at 100% 0%,rgba(76,141,255,.16),transparent 60%),radial-gradient(900px 520px at 0% 100%,rgba(124,108,242,.16),transparent 60%),linear-gradient(160deg,#101C44 0%,#0A1128 55%,#070D20 100%);
+  box-shadow:0 24px 70px rgba(0,0,0,.55);font-size:17px;line-height:1.65;color:var(--soft)}
+.slide.active{display:flex}
+.slide > *{position:relative;z-index:2}
+.shards{position:absolute!important;inset:0;z-index:0!important;pointer-events:none}
+.shards i{position:absolute;display:block;clip-path:polygon(0 25%,100% 0,100% 75%,0 100%)}
+.shards i.r{clip-path:polygon(0 0,100% 25%,100% 100%,0 75%)}
+.shards i.t{clip-path:polygon(0 0,100% 50%,0 100%)}
+/* chrome */
+.top{position:absolute!important;top:30px;right:72px;left:72px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim)}
+.acad{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:600;font-size:14px}
+.acad .gem{width:30px;height:30px;border-radius:8px;background:conic-gradient(from 210deg,#F5873A,#F7B24A,#35D08F,#4C8DFF,#7C6CF2,#F5873A);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.acad small{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:1.5px;color:var(--dim);font-weight:400;direction:ltr;text-align:right}
+.rule{position:absolute!important;top:78px;right:72px;left:72px;height:2px;background:var(--grad);opacity:.55;border-radius:2px}
+.foot{position:absolute!important;bottom:24px;right:72px;left:72px;display:flex;justify-content:space-between;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
+.foot b{color:var(--soft);font-weight:600}
+/* type */
+h1,h2,h3{margin:0;color:var(--ink);font-family:var(--f-display);font-weight:800;text-wrap:balance}
+h2{font-size:34px;line-height:1.35;letter-spacing:0}
+h3{font-size:18px;font-weight:700;line-height:1.5}
+p{margin:0}
+.lead{font-size:19px;line-height:1.75;color:var(--soft);max-width:66ch}
+.note{font-size:14px;color:var(--dim);margin-top:auto;padding-top:10px;border-top:1px solid var(--line)}
+.lt{direction:ltr;unicode-bidi:isolate}
+code,.mono{font-family:var(--f-mono);font-size:.9em;direction:ltr;unicode-bidi:isolate}
+.grow{flex:1;min-height:0}
+.center{display:flex;flex-direction:column;justify-content:center}
+/* cards */
+.grid{display:grid;gap:16px;min-height:0}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+.card{position:relative;background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:18px 22px 20px;min-width:0;overflow:hidden;backdrop-filter:blur(6px)}
+.card::before{content:"";position:absolute;top:0;right:0;left:0;height:3px;background:var(--c,var(--teal))}
+.card h3{color:var(--c2,var(--ink));margin-bottom:6px}
+.card p{font-size:16.5px;line-height:1.75;color:var(--soft)}
+.card.feature{background:linear-gradient(145deg,rgba(76,141,255,.20),rgba(124,108,242,.16));border-color:rgba(124,108,242,.45)}
+.card.feature::before{background:var(--grad)}
+.card.warn{background:rgba(240,108,126,.08);border-color:rgba(240,108,126,.30)}
+.c-teal{--c:var(--teal);--c2:var(--teal)}.c-orange{--c:var(--orange);--c2:var(--amber)}.c-purple{--c:var(--purple);--c2:#B3A9FF}.c-blue{--c:var(--blue);--c2:#9CC0FF}.c-green{--c:var(--green);--c2:var(--green)}.c-rose{--c:var(--rose);--c2:#FF9AA7}
+/* flow */
+.flow{display:flex;align-items:stretch;gap:10px}
+.flow .step{flex:1;min-width:0}
+.flow .arrow{align-self:center;color:var(--teal);font-size:22px;flex:none}
+.step .n{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:var(--grad);color:#0A1128;font-weight:800;font-size:14px;margin-left:8px;vertical-align:middle;font-family:var(--f-mono)}
+/* tables */
+.tw{overflow-x:auto;border-radius:14px;border:1px solid var(--line)}
+table.t{border-collapse:collapse;width:100%;font-size:15.5px;background:rgba(255,255,255,.025)}
+table.t th{background:linear-gradient(90deg,rgba(76,141,255,.28),rgba(124,108,242,.28));color:var(--ink);text-align:right;font-weight:700;padding:11px 16px;font-size:15px;font-family:var(--f-display)}
+table.t td{padding:9px 16px;border-top:1px solid var(--line);vertical-align:middle;line-height:1.6;color:var(--soft)}
+table.t tr:nth-child(even) td{background:rgba(255,255,255,.03)}
+table.t td.first{color:var(--ink);font-weight:600}
+.st{display:inline-block;font-size:13.5px;font-weight:600;padding:3px 12px;border-radius:999px;white-space:nowrap}
+.st.ok{background:rgba(53,208,143,.14);color:var(--green);border:1px solid rgba(53,208,143,.35)}
+.st.opt{background:rgba(247,178,74,.12);color:var(--amber);border:1px solid rgba(247,178,74,.35)}
+.st.fut{background:rgba(124,108,242,.14);color:#B3A9FF;border:1px solid rgba(124,108,242,.38)}
+table.t.compact td{padding:6px 16px;font-size:15px}
+table.t.compact th{padding:9px 16px}
+.res-ok{color:var(--green)}.res-no{color:var(--amber)}.res-ref{color:#FF9AA7}
+/* code */
+pre.code{margin:0;direction:ltr;text-align:left;background:rgba(3,8,22,.75);border:1px solid var(--line);border-radius:16px;padding:20px 24px;font-family:var(--f-mono);font-size:14.5px;line-height:1.9;color:#DCE4F2;overflow:auto;white-space:pre}
+pre.code .n{color:var(--amber)}
+/* members */
+.members{display:flex;flex-wrap:wrap;justify-content:center;gap:16px}
+.member{width:262px;background:var(--glass);border:1px solid var(--line);border-radius:18px;padding:18px 16px;text-align:center;display:flex;flex-direction:column;gap:2px;align-items:center}
+.member .num{font-family:var(--f-mono);font-size:46px;font-weight:500;line-height:1.1;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.member .role{font-size:13.5px;color:var(--dim)}
+.member .name{font-family:var(--f-display);font-size:19px;font-weight:700;color:var(--ink)}
+/* bigs */
+.big{font-family:var(--f-mono);font-size:120px;line-height:1;font-weight:500;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.kv{display:flex;flex-direction:column;gap:14px}
+.kv h3{color:var(--teal)}
+.kv p{font-size:16.5px;color:var(--soft)}
+.shot{border-radius:16px;overflow:hidden;border:1px solid var(--line);background:#0B1022;box-shadow:0 14px 40px rgba(0,0,0,.45);min-height:0;display:flex;align-items:center;justify-content:center}
+.shot img{display:block;max-width:100%;max-height:100%;object-fit:contain}
+.ref{display:flex;flex-direction:column;gap:4px}
+.ref h3{color:var(--teal)}
+.ref a{color:#9CC0FF;font-family:var(--f-mono);font-size:14px;direction:ltr;text-align:right;text-decoration:none;word-break:break-all}
+.ref a:hover,.ref a:focus-visible{text-decoration:underline;outline:none}
+.qr{background:#fff;border-radius:14px;padding:12px;width:200px;height:200px;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.qr img{width:100%;height:100%;display:block;image-rendering:pixelated}
+/* cover */
+.slide.cover{padding:0 96px;justify-content:center;background:linear-gradient(180deg,#26326E 0%,#151D47 45%,#060A19 100%)}
+.cover .eyebrow{font-size:14px;color:var(--soft);letter-spacing:.3px}
+.cover h1{font-family:var(--f-display);font-size:96px;line-height:1.15;direction:ltr;text-align:right;letter-spacing:-1px;background:linear-gradient(90deg,#FFFFFF 0%,#E6ECFF 60%,#B3A9FF 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.cover .tag{font-family:var(--f-display);font-size:46px;font-weight:700;color:var(--ink);line-height:1.4}
+.cover .bar{width:220px;height:4px;border-radius:4px;background:var(--grad);margin:18px 0 6px auto}
+.cover .meta{display:flex;gap:10px;justify-content:flex-start;flex-wrap:wrap;margin-top:12px}
+.cover .meta span{font-size:13.5px;padding:5px 14px;border-radius:999px;border:1px solid rgba(255,255,255,.22);color:var(--soft);background:rgba(255,255,255,.04)}
+/* controls */
+.ctrl{flex:none;display:flex;align-items:center;gap:10px;padding:8px max(12px,env(safe-area-inset-right,0px)) calc(8px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));background:var(--frame);border-top:1px solid var(--frame-line);font-size:13px;color:var(--soft)}
+.ctrl button{font:inherit;font-size:13px;color:var(--soft);background:#111A33;border:1px solid var(--frame-line);border-radius:9px;padding:6px 12px;cursor:pointer;min-height:34px}
+.ctrl button:hover{background:#18244A;color:#fff}
+.ctrl button:focus-visible{outline:2px solid var(--amber);outline-offset:2px}
+.ctrl button[aria-pressed="true"]{background:var(--amber);color:#0A1128;border-color:var(--amber)}
+.ctrl .where{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ctrl .count{font-variant-numeric:tabular-nums;color:#fff;direction:ltr}
+.progress{position:absolute;right:0;top:0;height:3px;background:var(--grad);transition:width .25s;z-index:4}
+.toc{position:absolute;inset:0;background:rgba(5,10,24,.95);overflow:auto;padding:24px max(16px,env(safe-area-inset-left,0px));z-index:5}
+.toc ol{max-width:760px;margin:0 auto;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:6px}
+.toc a{display:flex;gap:10px;color:var(--soft);text-decoration:none;font-size:15px;padding:8px 10px;border-radius:9px;border:1px solid var(--frame-line)}
+.toc a:hover,.toc a:focus-visible{background:#18244A;color:#fff;outline:none}
+.toc a.cur{background:var(--amber);color:#0A1128;border-color:var(--amber)}
+.toc a span{font-family:var(--f-mono);width:24px;flex:none;color:var(--dim)}
+.toc a.cur span{color:#0A1128}
+@media (max-width:640px){.ctrl .lbl{display:none}}
+@media (prefers-reduced-motion:reduce){.progress{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="viewport" id="vp">
+<div class="progress" id="prog"></div>
+<div class="stage" id="stage">
+
+<!-- 1 -->
+<section class="slide cover" data-label="DealGuard">
+  <div class="shards" aria-hidden="true">
+    <i style="right:330px;top:66px;width:76px;height:66px;background:linear-gradient(135deg,#FFB547,#F5703A)" class="t"></i>
+    <i style="left:46px;top:180px;width:40px;height:68px;background:linear-gradient(180deg,#35D08F,#2C8C9E)"></i>
+    <i style="right:120px;top:110px;width:40px;height:66px;background:linear-gradient(180deg,#35D08F,#2C6FA0)"></i>
+    <i style="right:240px;top:22px;width:80px;height:115px;background:#04060F"></i>
+    <i style="left:230px;top:155px;width:40px;height:135px;background:#0B1027" class="r"></i>
+    <i style="left:540px;top:135px;width:78px;height:90px;background:#05081A"></i>
+    <i style="left:230px;top:430px;width:40px;height:66px;background:linear-gradient(180deg,#FF7A3D,#D9584E)" class="r"></i>
+    <i style="right:40px;top:290px;width:40px;height:92px;background:linear-gradient(180deg,#5C86E6,#6A4FB8)"></i>
+    <i style="right:190px;top:555px;width:118px;height:90px;background:linear-gradient(135deg,#FF8A3D,#E2555E)" class="r"></i>
+    <i style="left:660px;top:610px;width:40px;height:66px;background:#1B2A63"></i>
+    <i style="right:460px;top:430px;width:118px;height:110px;background:#121C47" class="r"></i>
+    <i style="left:390px;top:560px;width:40px;height:92px;background:#1A2659"></i>
+  </div>
+  <p class="eyebrow">تطوير حلول الذكاء الاصطناعي التوليدي · أكاديمية سدايا</p>
+  <h1>DealGuard</h1>
+  <div class="bar" aria-hidden="true"></div>
+  <p class="tag">تحقّق من العرض، لا من الإعلان</p>
+  <div class="meta"><span>DealGuard · Group 1</span></div>
+</section>
+
+<!-- 2 -->
+<section class="slide" data-label="أعضاء Group 1">
+  <h2>أعضاء Group 1</h2>
+  <p class="lead">برنامج تطوير حلول الذكاء الاصطناعي التوليدي، أكاديمية سدايا.</p>
+  <div class="grow center">
+    <div class="members">
+      <div class="member"><span class="num">1</span><span class="role">عضو</span><span class="name">يزيد الحارثي</span></div>
+      <div class="member"><span class="num">2</span><span class="role">عضو</span><span class="name">ياسمين البشر</span></div>
+      <div class="member"><span class="num">3</span><span class="role">عضو</span><span class="name">نوره الجلعود</span></div>
+      <div class="member"><span class="num">4</span><span class="role">عضو</span><span class="name">ثامر الهويريني</span></div>
+      <div class="member"><span class="num">5</span><span class="role">عضو</span><span class="name">عبدالله المشعفي</span></div>
+      <div class="member"><span class="num">6</span><span class="role">عضو</span><span class="name">لمى الشهراني</span></div>
+      <div class="member"><span class="num">7</span><span class="role">عضو</span><span class="name">جود الراشد</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 3 -->
+<section class="slide" data-label="المشكلة وفكرة DealGuard">
+  <h2>المشكلة وفكرة <span class="lt">DealGuard</span></h2>
+  <p class="lead">الإعلانات تخفي الاستثناءات والحد الأعلى للخصم والحد الأدنى للإنفاق وتواريخ الانتهاء، فلا يرى المتسوق أو موظف الدعم السعر الحقيقي بسهولة. وقد يخترع روبوت محادثة عادي سياسات أو يخطئ في حساب المال.</p>
+  <div class="grid g2 grow" style="grid-template-columns:1.1fr .9fr;align-items:stretch">
+    <div class="grid" style="grid-template-rows:auto auto;gap:16px">
+      <div class="card c-teal"><h3>المستخدم والطلب</h3><p>متسوق أو موظف دعم: هل «خصم 20% على كل شيء!» صحيح لهذا المنتج؟</p></div>
+      <div class="grid g2">
+        <div class="card c-blue"><h3>الأدوات</h3><p>محرك قواعد <span class="lt">Python</span><br>حساب الخصم والسعر</p></div>
+        <div class="card c-purple"><h3>المعرفة والمصادر</h3><p>سياسات الكوبونات<br>8 سياسات مصطنعة</p></div>
+      </div>
+    </div>
+    <div class="card feature center" style="text-align:center"><h3 style="font-size:24px;color:#fff">المخرج المطلوب</h3><p style="font-size:19px;color:#E6ECFF;line-height:1.9">الخصم الفعلي والسعر النهائي<br>تحذير من الإعلان المضلل<br>مع ذكر معرّف المصدر</p></div>
+  </div>
+</section>
+
+<!-- 4 -->
+<section class="slide" data-label="ما يميّز DealGuard">
+  <h2>ما يميّز <span class="lt">DealGuard</span></h2>
+  <p class="lead">أربع ضمانات تجعل الحكم قابلًا للفحص بدل جواب مقنع بلا مصدر.</p>
+  <div class="grid g2 grow" style="align-content:center">
+    <div class="card c-teal"><h3>مبني على المصدر</h3><p>كل حكم يستشهد بمعرّف سياسة، مثل <span class="lt">DEAL-SAVE20</span>.</p></div>
+    <div class="card c-rose warn"><h3>رفض آمن</h3><p>كوبون مجهول أو مفقود يعطي <span class="lt">REFUSED</span>، بلا سياسة مخترعة وبلا خصم.</p></div>
+    <div class="card c-blue"><h3>حساب حتمي للمال</h3><p>الأهلية والأسعار تُحسب في <span class="lt">Python</span>، لا بنموذج ذكاء اصطناعي.</p></div>
+    <div class="card c-purple"><h3>شفافية</h3><p>الواجهة تعرض الدليل وفحوص القواعد وخطوات الحساب، وهل الشرح مولَّد بقالب أم بنموذج.</p></div>
+  </div>
+  <p class="note"><span class="lt">Gemini</span> (اختياري) يعيد صياغة الحقائق المتحقق منها فقط، ويُرفض ناتجه إذا أضاف رقمًا أو أغفل معرّف المصدر.</p>
+</section>
+
+<!-- 5 -->
+<section class="slide" data-label="التقنيات ودورها الفعلي">
+  <h2>التقنيات ودورها الفعلي</h2>
+  <p class="lead">منفَّذ = يعمل اليوم. اختياري = في الكود لكنه يحتاج مفتاح <span class="lt">API</span> من المستخدم. مستقبلي = غير مبني بعد.</p>
+  <div class="tw"><table class="t compact">
+    <tr><th style="width:30%">التقنية</th><th>الدور</th><th style="width:28%">الحالة</th></tr>
+    <tr><td class="first"><span class="lt">Python 3</span> (المكتبة القياسية)</td><td>المنطق كله، وخادم الويب، والاختبارات</td><td><span class="st ok">منفَّذ</span></td></tr>
+    <tr><td class="first"><span class="lt">TF-IDF</span> + تشابه جيب التمام</td><td>استرجاع نصوص السياسات (حرف <span class="lt">R</span> في <span class="lt">RAG</span>)</td><td><span class="st ok">منفَّذ</span></td></tr>
+    <tr><td class="first">محرك قواعد بـ<span class="lt">Python</span></td><td>فحص الانتهاء والفئة والحد الأدنى وحساب الخصم</td><td><span class="st ok">منفَّذ</span></td></tr>
+    <tr><td class="first"><span class="lt">HTML/CSS/JavaScript</span></td><td>واجهة صفحة واحدة متجاوبة، والمخرجات مهرّبة</td><td><span class="st ok">منفَّذ</span></td></tr>
+    <tr><td class="first"><span class="lt">Google Gemini REST API</span></td><td>إعادة صياغة النتائج المتحقق منها</td><td><span class="st opt">اختياري: يحتاج مفتاحًا، ومحاكاة فقط</span></td></tr>
+    <tr><td class="first"><span class="lt">Gradio</span></td><td>واجهة بديلة</td><td><span class="st opt">اختياري: محجوب على جهاز التطوير</span></td></tr>
+    <tr><td class="first"><span class="lt">Render</span> (الخطة المجانية)</td><td>استضافة عامة عبر <span class="lt">render.yaml</span></td><td><span class="st fut">مُجهَّز وغير منشور</span></td></tr>
+  </table></div>
+  <p class="note">التقنيات الأساسية كلها من المكتبة القياسية دون اعتماديات خارجية.</p>
+</section>
+
+<!-- 6 -->
+<section class="slide" data-label="المعمارية: من الإدخال إلى الحكم">
+  <h2>المعمارية: من الإدخال إلى الحكم</h2>
+  <p class="lead">الرسالة الأساسية: «الذكاء الاصطناعي يسترجع ويشرح، و<span class="lt">Python</span> يقرر ويحسب».</p>
+  <div class="grow center">
+    <div class="flow">
+      <div class="card step c-teal"><h3><span class="n">1</span>الإدخال والتحقق</h3><p>سعر، فئة، كوبون، ادّعاء</p></div>
+      <div class="arrow" aria-hidden="true">←</div>
+      <div class="card step c-blue"><h3><span class="n">2</span>استرجاع السياسة</h3><p><span class="lt">TF-IDF</span> على 8 سياسات</p></div>
+      <div class="arrow" aria-hidden="true">←</div>
+      <div class="card step c-purple"><h3><span class="n">3</span>القواعد والحساب</h3><p>انتهاء، فئة، حد أدنى، خصم</p></div>
+      <div class="arrow" aria-hidden="true">←</div>
+      <div class="card step feature"><h3 style="color:#fff"><span class="n">4</span>الادّعاء والشرح</h3><p style="color:#E6ECFF">فحص الادّعاء ثم قالب أو <span class="lt">Gemini</span></p></div>
+    </div>
+  </div>
+  <p class="note">الاسترجاع لفظي (<span class="lt">TF-IDF</span>)، أما القرار والحساب ففي كود <span class="lt">Python</span> حتمي.</p>
+</section>
+
+<!-- 7 -->
+<section class="slide" data-label="التدفق خطوة بخطوة">
+  <h2>التدفق خطوة بخطوة</h2>
+  <p class="lead">سبع مراحل من إدخال المستخدم إلى الشرح: الاسترجاع في <code>retriever.py</code>، والتحقق والقواعد والحساب في <code>verifier.py</code>، والشرح الاختياري في <code>llm.py</code>.</p>
+  <div class="grid grow" style="grid-template-columns:.85fr 1.15fr;align-items:stretch">
+    <div class="kv center">
+      <div><h3>التحقق من المدخلات</h3><p>السعر موجب وحتى مليون ريال؛ الكوبون من 3 إلى 20 حرفًا؛ الادّعاء حتى 300 حرف</p></div>
+      <div><h3>الاسترجاع</h3><p>تشابه جيب التمام: أعلى 3 نتائج بحد أدنى 0.05</p></div>
+      <div><h3>الرفض الآمن</h3><p>كوبون مجهول يعطي <span class="lt">REFUSED</span>، بلا خصم ولا سياسة مخترعة</p></div>
+    </div>
+<pre class="code"><span class="n">1.</span> User input
+<span class="n">2.</span> Validation
+<span class="n">3.</span> TF-IDF retrieval (top 3, min score 0.05)
+<span class="n">4.</span> Rule verification (expiry, category, min spend)
+<span class="n">5.</span> Discount calculation (percent+cap | flat | free shipping)
+<span class="n">6.</span> Claim check ("%" / "SAR" vs real discount)
+<span class="n">7.</span> Explanation (template | Gemini + grounding guard)</pre>
+  </div>
+  <p class="note">الشرح قالب افتراضيًا؛ عند ضبط <span class="lt">GEMINI_API_KEY</span> يعيد <span class="lt">Gemini</span> الصياغة ويقبلها الحارس أو يرفضها.</p>
+</section>
+
+<!-- 8 -->
+<section class="slide" data-label="عرض حي: ثلاثة سيناريوهات">
+  <h2>عرض حي: ثلاثة سيناريوهات</h2>
+  <p class="lead">شغّل <code>python app_web.py</code> ثم افتح <code>http://127.0.0.1:8765</code>. غيّر الفئة إلى <span class="lt">Fashion</span> للسيناريو <span class="lt">A</span>.</p>
+  <div class="tw"><table class="t">
+    <tr><th style="width:12%">السيناريو</th><th style="width:36%">المدخلات</th><th>النتيجة المتوقعة</th></tr>
+    <tr><td class="first lt" style="font-family:var(--f-mono);font-size:20px">A</td><td><span class="mono">1000 SAR | Fashion | SAVE20 | "20% off everything!"</span></td><td><span class="res-ok">مؤهَّل</span>: الخصم 20% يساوي 200 لكن الحد الأعلى 150، فالخصم 150 والسعر النهائى 850 ريال، مع تحذير ادّعاء مضلل. المصدر <span class="lt">DEAL-SAVE20</span></td></tr>
+    <tr><td class="first lt" style="font-family:var(--f-mono);font-size:20px">B</td><td><span class="mono">1000 SAR | Electronics | SAVE20 | "20% off"</span></td><td><span class="res-no">غير مؤهَّل</span> (الإلكترونيات مستثناة): الخصم 0 والسعر النهائي 1000 ريال</td></tr>
+    <tr><td class="first lt" style="font-family:var(--f-mono);font-size:20px">C</td><td><span class="mono">100 SAR | Books | FAKE99 | "99% off"</span></td><td><span class="res-ref">مرفوض (<span class="lt">REFUSED</span>)</span>: لا دليل في السياسات، ولا خصم مخترع</td></tr>
+  </table></div>
+  <p class="note">الكوبون <span class="lt">SAVE20</span> صالح حتى <span class="lt">2026-12-31</span>؛ بعد هذا التاريخ تتغير النتائج.</p>
+</section>
+
+<!-- 9 -->
+<section class="slide" data-label="عرض حي: لقطة من الواجهة (السيناريو B)">
+  <h2>عرض حي: لقطة من الواجهة (السيناريو <span class="lt">B</span>)</h2>
+  <p class="lead">تعرض الواجهة الحكم والدليل المسترجع وخطوات الحساب الفعلية، وتوضح أن الشرح مولَّد بقالب.</p>
+  <div class="grid grow" style="grid-template-columns:.75fr 1.25fr;align-items:stretch">
+    <div class="kv center">
+      <div><h3>المدخلات</h3><p class="mono" style="font-size:15px">1000 SAR | Electronics | SAVE20 | "20% off everything!"</p></div>
+      <div><h3>الحكم</h3><p>غير مؤهَّل: الإلكترونيات مستثناة. الخصم 0 والسعر 1000 ريال.</p></div>
+      <div><h3>الدليل</h3><p>المصدر <span class="lt">DEAL-SAVE20</span>، مع تحذير من ادّعاء مضلل: الإعلان يوحي بخصم 200 والسياسة تعطي 0.</p></div>
+    </div>
+    <div class="shot"><img src="img/dealguard-demo.jpg" alt="واجهة DealGuard للسيناريو B: الحكم NOT ELIGIBLE، والسعر الأصلي 1000 ريال، والخصم الفعلي 0، والسعر النهائي 1000 ريال، مع تحذير ادّعاء مضلل والدليل المسترجع وخطوات الحساب والشرح المولّد بقالب."></div>
+  </div>
+  <p class="note">اللقطة من الملف <code>screenshots/dealguard-demo.png</code> في المستودع.</p>
+</section>
+
+<!-- 10 -->
+<section class="slide" data-label="الأمان والموثوقية">
+  <h2>الأمان والموثوقية</h2>
+  <p class="lead">ضوابط مطبّقة في الكود: الخادم والمدخلات والمخرجات والأسرار وناتج النموذج.</p>
+  <div class="grow center">
+    <div class="grid g4">
+      <div class="card c-teal"><h3>الخادم والمدخلات</h3><p>مضيف محلي وفحص <span class="lt">Host</span>، وقبول <span class="lt">JSON</span> فقط، وحد لحجم الطلب</p></div>
+      <div class="card c-blue"><h3>المخرجات</h3><p>تهريب <span class="lt">HTML</span> وترويسات أمان (<span class="lt">CSP</span> و<span class="lt">nosniff</span>)</p></div>
+      <div class="card c-purple"><h3>الأسرار</h3><p>المفتاح من متغير بيئة وملف البيئة خارج <span class="lt">git</span></p></div>
+      <div class="card feature"><h3 style="color:#fff">ناتج النموذج</h3><p style="color:#E6ECFF">غير موثوق ويُفحص قبل العرض</p></div>
+    </div>
+  </div>
+  <p class="note">الرفض الآمن والاستشهاد بالمصدر وفحص المدخلات والحارس تغطيها الاختبارات الـ25.</p>
+</section>
+
+<!-- 11 -->
+<section class="slide" data-label="الاختبارات">
+  <h2>الاختبارات</h2>
+  <p class="lead">تشغيل <code>python -m unittest -v</code> يعطي 25 اختبارًا ناجحًا، بالمكتبة القياسية وبدون شبكة.</p>
+  <div class="grid grow" style="grid-template-columns:.55fr 1.45fr;align-items:center">
+    <div style="text-align:center"><div class="big">25</div><p style="font-family:var(--f-display);font-size:22px;font-weight:700;color:var(--ink);margin-top:8px">اختبارًا ناجحًا</p></div>
+    <div class="tw"><table class="t">
+      <tr><th>الفئة</th><th style="width:22%">العدد</th></tr>
+      <tr><td class="first">اختبارات أساسية: القواعد والحد الأعلى والاسترجاع والرفض والتحقق</td><td style="font-family:var(--f-mono);font-size:22px;color:var(--ink)">16</td></tr>
+      <tr><td class="first">اختبارات <span class="lt">LLM</span> والويب (<span class="lt">Gemini</span> بمحاكاة)</td><td style="font-family:var(--f-mono);font-size:22px;color:var(--ink)">9</td></tr>
+    </table></div>
+  </div>
+</section>
+
+<!-- 12 -->
+<section class="slide" data-label="حدود المشروع">
+  <h2>حدود المشروع</h2>
+  <p class="lead">نعرض الحدود بوضوح لأن <span class="lt">DealGuard</span> نموذج أولي تعليمي، وليس مناسبًا لقرارات تسعير حقيقية.</p>
+  <div class="grid g2 grow" style="align-content:center">
+    <div class="card c-teal"><h3>بيانات محدودة</h3><p>8 سياسات مصطنعة، وسلعة واحدة، بلا دمج كوبونات أو ضرائب أو رسوم شحن.</p></div>
+    <div class="card c-rose warn"><h3><span class="lt">Gemini</span> لم يُختبر مباشرة</h3><p>لم يتوفر مفتاح، وتوجد اختبارات بمحاكاة فقط.</p></div>
+    <div class="card c-blue"><h3>استرجاع لفظي</h3><p><span class="lt">TF-IDF</span> يعتمد على الكلمات ولا يفهم المعنى.</p></div>
+    <div class="card c-purple"><h3>خادم تجريبي</h3><p>بلا تحديد لمعدل الطلبات،<br>وغير منشور للعامة.</p></div>
+  </div>
+  <p class="note">الحارس يفحص المعرّفات والأرقام، لا المعنى الكامل.</p>
+</section>
+
+<!-- 13 -->
+<section class="slide" data-label="التطوير المستقبلي">
+  <h2>التطوير المستقبلي</h2>
+  <p class="lead">خطوات مقترحة لم تُبنَ بعد.</p>
+  <div class="grow center">
+    <div class="flow">
+      <div class="card step c-teal"><h3><span class="n">1</span>استرجاع دلالي</h3><p><span class="lt">Embeddings</span> وسياسات بالعربية</p></div>
+      <div class="arrow" aria-hidden="true">←</div>
+      <div class="card step c-blue"><h3><span class="n">2</span>شرح <span class="lt">Gemini</span></h3><p>حي ومُقيَّم وبالعربية</p></div>
+      <div class="arrow" aria-hidden="true">←</div>
+      <div class="card step c-purple"><h3><span class="n">3</span>سلال أوسع</h3><p>عدة منتجات، دمج كوبونات، <span class="lt">VAT</span></p></div>
+      <div class="arrow" aria-hidden="true">←</div>
+      <div class="card step feature"><h3 style="color:#fff"><span class="n">4</span>إنتاج</h3><p style="color:#E6ECFF">سياسات <span class="lt">PDF/HTML</span> بإصدارات، ونشر عام</p></div>
+    </div>
+  </div>
+  <p class="note">كل ما في هذه الشريحة غير مبني حاليًا.</p>
+</section>
+
+<!-- 14 -->
+<section class="slide" data-label="المستودع والمراجع">
+  <h2>المستودع والمراجع</h2>
+  <p class="lead">الكود والاختبارات ووثيقة التسليم متاحة في المستودع.</p>
+  <div class="grid grow" style="grid-template-columns:1fr auto;align-items:center;gap:40px">
+    <div style="display:flex;flex-direction:column;gap:22px">
+      <div class="ref"><h3>المستودع: <span class="lt">DealGuard</span></h3><a href="https://github.com/Thamer-99/DealGuard" target="_blank" rel="noopener">https://github.com/Thamer-99/DealGuard</a></div>
+      <div class="ref"><h3>لقطة الواجهة</h3><a href="https://github.com/Thamer-99/DealGuard/blob/main/screenshots/dealguard-demo.png" target="_blank" rel="noopener">https://github.com/Thamer-99/DealGuard/blob/main/screenshots/dealguard-demo.png</a></div>
+      <div class="ref"><h3>البرنامج: أكاديمية سدايا</h3><a href="https://github.com/SDAIAAcademy" target="_blank" rel="noopener">https://github.com/SDAIAAcademy</a></div>
+    </div>
+    <div class="qr"><img src="img/qr.png" alt="رمز QR لرابط المستودع"></div>
+  </div>
+</section>
+
+<!-- 15 -->
+<section class="slide cover" data-label="شكرًا لكم">
+  <div class="shards" aria-hidden="true">
+    <i style="right:330px;top:66px;width:76px;height:66px;background:linear-gradient(135deg,#FFB547,#F5703A)" class="t"></i>
+    <i style="left:46px;top:180px;width:40px;height:68px;background:linear-gradient(180deg,#35D08F,#2C8C9E)"></i>
+    <i style="right:120px;top:110px;width:40px;height:66px;background:linear-gradient(180deg,#35D08F,#2C6FA0)"></i>
+    <i style="right:240px;top:22px;width:80px;height:115px;background:#04060F"></i>
+    <i style="left:230px;top:155px;width:40px;height:135px;background:#0B1027" class="r"></i>
+    <i style="left:230px;top:430px;width:40px;height:66px;background:linear-gradient(180deg,#FF7A3D,#D9584E)" class="r"></i>
+    <i style="right:40px;top:290px;width:40px;height:92px;background:linear-gradient(180deg,#5C86E6,#6A4FB8)"></i>
+    <i style="right:190px;top:555px;width:118px;height:90px;background:linear-gradient(135deg,#FF8A3D,#E2555E)" class="r"></i>
+    <i style="left:660px;top:610px;width:40px;height:66px;background:#1B2A63"></i>
+    <i style="left:390px;top:560px;width:40px;height:92px;background:#1A2659"></i>
+  </div>
+  <p class="tag" style="font-size:72px">شكرًا لكم</p>
+  <div class="bar" aria-hidden="true"></div>
+  <div class="meta"><span>DealGuard · Group 1</span></div>
+</section>
+
+</div>
+</div>
+<div class="ctrl" role="toolbar" aria-label="التنقل بين الشرائح">
+  <button id="prev" type="button" aria-label="الشريحة السابقة">→<span class="lbl"> السابق</span></button>
+  <button id="next" type="button" aria-label="الشريحة التالية"><span class="lbl">التالي </span>←</button>
+  <span class="count" id="count">1 / 15</span>
+  <span class="where" id="where"></span>
+  <button id="tocBtn" type="button" aria-pressed="false">المحتويات</button>
+  <button id="fsBtn" type="button" aria-label="ملء الشاشة">⤢</button>
+</div>
+</div>
+<script>
+(function(){
+  const stage=document.getElementById('stage'),vp=document.getElementById('vp');
+  const slides=[...stage.querySelectorAll('.slide')],N=slides.length;
+  slides.forEach((s,k)=>{
+    s.setAttribute('aria-roledescription','شريحة');s.setAttribute('aria-label',(k+1)+' من '+N);
+    if(!s.classList.contains('cover')){
+      const top=document.createElement('div');top.className='top';
+      top.innerHTML='<div class="acad"><span class="gem" aria-hidden="true"></span><span>أكاديمية سدايا<small>SDAIA Academy</small></span></div><span>تطوير حلول الذكاء الاصطناعي التوليدي</span>';
+      s.prepend(top);
+      const r=document.createElement('div');r.className='rule';s.prepend(r);
+      const f=document.createElement('div');f.className='foot';
+      f.innerHTML='<span><b>DealGuard · Group 1</b></span><span>الشريحة '+(k+1)+' من '+N+'</span>';
+      s.appendChild(f);
+    }
+  });
+  let i=0;const count=document.getElementById('count'),where=document.getElementById('where'),prog=document.getElementById('prog');
+  const label=k=>slides[k].dataset.label||'';
+  function go(n,push){
+    i=Math.max(0,Math.min(N-1,n));
+    slides.forEach((s,k)=>s.classList.toggle('active',k===i));
+    count.textContent=(i+1)+' / '+N;where.textContent=label(i);prog.style.width=((i+1)/N*100)+'%';
+    if(push!==false){const h='#'+(i+1);if(location.hash!==h){try{history.replaceState(null,'',h)}catch(e){location.hash=h}}}
+    document.querySelectorAll('.toc a').forEach(a=>a.classList.toggle('cur',+a.dataset.i===i));
+  }
+  function fit(){const sc=Math.min(vp.clientWidth/1280,vp.clientHeight/720)*0.985;stage.style.transform='translate(-50%,-50%) scale('+sc+')'}
+  const toc=document.createElement('div');toc.className='toc';toc.hidden=true;toc.setAttribute('role','dialog');toc.setAttribute('aria-label','المحتويات');
+  const ol=document.createElement('ol');toc.appendChild(ol);
+  slides.forEach((s,k)=>{const li=document.createElement('li'),a=document.createElement('a');a.href='#'+(k+1);a.dataset.i=k;a.innerHTML='<span>'+(k+1)+'</span>';a.appendChild(document.createTextNode(label(k)));a.addEventListener('click',e=>{e.preventDefault();go(k);setToc(false)});li.appendChild(a);ol.appendChild(li)});
+  vp.appendChild(toc);
+  const tocBtn=document.getElementById('tocBtn');
+  function setToc(on){toc.hidden=!on;tocBtn.setAttribute('aria-pressed',on);if(on){const c=toc.querySelector('a.cur');c&&c.focus()}}
+  tocBtn.onclick=()=>setToc(toc.hidden);
+  document.getElementById('prev').onclick=()=>go(i-1);
+  document.getElementById('next').onclick=()=>go(i+1);
+  document.getElementById('fsBtn').onclick=()=>{try{document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{})}catch(e){}};
+  document.addEventListener('keydown',e=>{
+    const k=e.key;
+    if(k==='Escape'&&!toc.hidden){setToc(false);return}
+    if(k==='ArrowLeft'||k==='PageDown'||(k===' '&&e.target.tagName!=='BUTTON')){e.preventDefault();go(i+1)}
+    else if(k==='ArrowRight'||k==='PageUp'){e.preventDefault();go(i-1)}
+    else if(k==='Home')go(0);else if(k==='End')go(N-1);
+    else if(k==='o'||k==='O')setToc(toc.hidden);
+    else if(k==='f'||k==='F')document.getElementById('fsBtn').click();
+  });
+  let sx=null;
+  vp.addEventListener('touchstart',e=>{sx=e.touches[0].clientX},{passive:true});
+  vp.addEventListener('touchend',e=>{if(sx==null)return;const dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>50)go(i+(dx>0?1:-1));sx=null});
+  window.addEventListener('resize',fit);
+  window.addEventListener('hashchange',()=>{const n=parseInt(location.hash.slice(1),10);if(n&&n-1!==i)go(n-1,false)});
+  const start=parseInt((location.hash||'').slice(1),10);
+  fit();go(start?start-1:0,false);
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(fit);
+})();
+</script>
+</body>
+</html>
