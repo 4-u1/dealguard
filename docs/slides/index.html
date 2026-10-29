@@ -35,11 +35,13 @@ body{background:var(--frame);color:var(--ink);font-family:var(--f-body);overflow
 .shards i.r{clip-path:polygon(0 0,100% 25%,100% 100%,0 75%)}
 .shards i.t{clip-path:polygon(0 0,100% 50%,0 100%)}
 /* chrome */
-.top{position:absolute!important;top:30px;right:72px;left:72px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim)}
-.acad{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:600;font-size:14px}
-.acad .gem{width:30px;height:30px;border-radius:8px;background:conic-gradient(from 210deg,#F5873A,#F7B24A,#35D08F,#4C8DFF,#7C6CF2,#F5873A);clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
-.acad small{display:block;font-family:var(--f-mono);font-size:10.5px;letter-spacing:1.5px;color:var(--dim);font-weight:400;direction:ltr;text-align:right}
-.rule{position:absolute!important;top:78px;right:72px;left:72px;height:2px;background:var(--grad);opacity:.55;border-radius:2px}
+.top{position:absolute!important;top:22px;right:72px;left:72px;display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--dim)}
+.acad{display:flex;align-items:center;background:#FFFFFF;border-radius:10px;padding:5px 12px;box-shadow:0 4px 14px rgba(0,0,0,.35)}
+.acad img{display:block;height:34px;width:auto}
+.corner{position:absolute!important;left:0;bottom:0;width:480px;height:280px;background:#FFFFFF;clip-path:polygon(0 0,100% 100%,0 100%);z-index:3!important}
+.corner img{position:absolute;left:30px;bottom:24px;width:210px;height:auto}
+.formcode{position:absolute!important;right:60px;bottom:20px;font-family:Arial,sans-serif;font-size:11px;color:#E6ECFF;direction:ltr;z-index:3!important}
+.rule{position:absolute!important;top:84px;right:72px;left:72px;height:2px;background:var(--grad);opacity:.55;border-radius:2px}
 .foot{position:absolute!important;bottom:24px;right:72px;left:72px;display:flex;justify-content:space-between;font-size:12px;color:var(--dim);font-variant-numeric:tabular-nums}
 .foot b{color:var(--soft);font-weight:600}
 /* type */
@@ -160,6 +162,8 @@ pre.code .n{color:var(--amber)}
   <div class="bar" aria-hidden="true"></div>
   <p class="tag">تحقّق من العرض، لا من الإعلان</p>
   <div class="meta"><span>DealGuard · Group 1</span></div>
+  <div class="corner"><img src="img/sdaia.png" alt="SDAIA · الهيئة السعودية للبيانات والذكاء الاصطناعي · Saudi Data &amp; AI Authority"></div>
+  <p class="formcode">SDAIA-F-CRS-100-01-V1</p>
 </section>
 
 <!-- 2 -->
@@ -383,6 +387,8 @@ pre.code .n{color:var(--amber)}
   <p class="tag" style="font-size:72px">شكرًا لكم</p>
   <div class="bar" aria-hidden="true"></div>
   <div class="meta"><span>DealGuard · Group 1</span></div>
+  <div class="corner"><img src="img/sdaia.png" alt="SDAIA · الهيئة السعودية للبيانات والذكاء الاصطناعي · Saudi Data &amp; AI Authority"></div>
+  <p class="formcode">SDAIA-F-CRS-100-01-V1</p>
 </section>
 
 </div>
@@ -404,7 +410,7 @@ pre.code .n{color:var(--amber)}
     s.setAttribute('aria-roledescription','شريحة');s.setAttribute('aria-label',(k+1)+' من '+N);
     if(!s.classList.contains('cover')){
       const top=document.createElement('div');top.className='top';
-      top.innerHTML='<div class="acad"><span class="gem" aria-hidden="true"></span><span>أكاديمية سدايا<small>SDAIA Academy</small></span></div><span>تطوير حلول الذكاء الاصطناعي التوليدي</span>';
+      top.innerHTML='<div class="acad"><img src="img/sdaia-academy.png" alt="أكاديمية سدايا · SDAIA Academy"></div><span>تطوير حلول الذكاء الاصطناعي التوليدي</span>';
       s.prepend(top);
       const r=document.createElement('div');r.className='rule';s.prepend(r);
       const f=document.createElement('div');f.className='foot';
