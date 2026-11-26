@@ -17,5 +17,22 @@ if [[ "${1:-}" == "--all" ]]; then
   (cd "$TOOLS/freellmapi" && npm install)
   [[ -d "$TOOLS/OpenMontage" ]] || git clone --depth 1 https://github.com/OpenMontageInc/OpenMontage.git "$TOOLS/OpenMontage"
   (cd "$TOOLS/OpenMontage" && make setup)
+  # API keys are NOT stored anywhere: they are environment "Network secrets" injected by the proxy
+  # (openrouter.ai, api.elevenlabs.io, 21st.dev). Tools only need a placeholder value.
+  sed -i 's/^ELEVENLABS_API_KEY=$/ELEVENLABS_API_KEY=proxy-injected/' "$TOOLS/OpenMontage/.env"
+  CFG="$TOOLS/freellmapi.config.json"
+  if [[ ! -f "$CFG" ]]; then
+    cat > "$CFG" <<EOF
+{ "admin": { "email": "admin@localhost.dev", "password": "$(openssl rand -hex 12)" },
+  "keys": [ { "platform": "openrouter", "key": "sk-or-v1-proxy-injected", "label": "proxy-injected" } ],
+  "models": [
+    { "platform": "openrouter", "modelId": "nvidia/nemotron-3.5-lightning:free", "displayName": "Nemotron 3.5 Lightning", "fallbackEnabled": true },
+    { "platform": "openrouter", "modelId": "nvidia/nemotron-3.5-super-vl:free", "displayName": "Nemotron 3.5 Super VL", "fallbackEnabled": true },
+    { "platform": "openrouter", "modelId": "google/gemma-4-31b-it:free", "displayName": "Gemma 4 31B", "fallbackEnabled": true } ],
+  "routing": { "strategy": "balanced" } }
+EOF
+    chmod 600 "$CFG"
+  fi
+  echo "start FreeLLMAPI: cd $TOOLS/freellmapi && FREEAPI_CONFIG_PATH=$CFG NODE_USE_ENV_PROXY=1 npm run dev"
 fi
 echo "tooling ready"

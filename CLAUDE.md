@@ -19,5 +19,12 @@
 - OpenMontage (`../tools/OpenMontage`): agentic video production; open it as its own workspace and
   follow its `AGENT_GUIDE.md`. `make preflight` lists which providers are configured.
 
+## API keys
+Keys live only as environment Network secrets (proxy-injected): `openrouter.ai`, `api.elevenlabs.io`,
+`21st.dev`. Never write real keys to files; tools get the placeholder `proxy-injected`.
+Node tools need `NODE_USE_ENV_PROXY=1` to reach the network.
+- FreeLLMAPI: start with `FREEAPI_CONFIG_PATH=../tools/freellmapi.config.json NODE_USE_ENV_PROXY=1 npm run dev`;
+  use an explicit model (e.g. `nemotron-3.5-lightning`), since `auto` may hit stale free-model entries.
+
 ## Tests
 `python -m pytest -q`
