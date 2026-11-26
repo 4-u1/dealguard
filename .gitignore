@@ -35,3 +35,6 @@ Thumbs.db
 .idea/
 .vscode/
 .agents/
+# Playwright CLI output (may contain credentials)
+.playwright-cli/
+graphify-out/cache/

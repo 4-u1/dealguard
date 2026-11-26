@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": ["-y", "@playwright/mcp@latest", "--headless", "--isolated", "--no-sandbox", "--executable-path", "/opt/pw-browsers/chromium"]
+    },
+    "graphify": {
+      "command": "graphify-mcp",
+      "args": ["graphify-out/graph.json"]
+    },
+    "magic": {
+      "command": "npx",
+      "args": ["-y", "@21st-dev/magic@latest"],
+      "env": { "TWENTY_FIRST_API_KEY": "${TWENTY_FIRST_API_KEY}" }
+    }
+  }
+}

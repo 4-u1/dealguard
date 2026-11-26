@@ -1,0 +1,134 @@
+{
+  "app.py": {
+    "mtime": 1795651834.7400246,
+    "seen": 1795652023.2497265,
+    "ast_hash": "64ea7f633aba6b7db75b35526256ac45",
+    "semantic_hash": ""
+  },
+  "app_web.py": {
+    "mtime": 1795651834.7400246,
+    "seen": 1795652023.2497344,
+    "ast_hash": "d78b9964e86005205a9879427a9d123c",
+    "semantic_hash": ""
+  },
+  "llm.py": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.2497377,
+    "ast_hash": "f6c941248116d5a03cadf7f699946a08",
+    "semantic_hash": ""
+  },
+  "policies.py": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.2497394,
+    "ast_hash": "baae948f99689bcc8ef5327d6f442f98",
+    "semantic_hash": ""
+  },
+  "render.yaml": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.249741,
+    "ast_hash": "860872330777631e58ab4496a521c9c0",
+    "semantic_hash": ""
+  },
+  "retriever.py": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.249742,
+    "ast_hash": "a39769851ed371ba00d901cf2bc6ea82",
+    "semantic_hash": ""
+  },
+  "skills-lock.json": {
+    "mtime": 1795651866.3823895,
+    "seen": 1795652023.2497437,
+    "ast_hash": "74fef9acaa2c41bcb6cdaaaf1405d501",
+    "semantic_hash": ""
+  },
+  "test_dealguard.py": {
+    "mtime": 1795651834.7423875,
+    "seen": 1795652023.249745,
+    "ast_hash": "07e27ce805704308da54bea4e50af851",
+    "semantic_hash": ""
+  },
+  "test_llm.py": {
+    "mtime": 1795651834.7423875,
+    "seen": 1795652023.249746,
+    "ast_hash": "591dab9f55cc1b75731925b510ae1f79",
+    "semantic_hash": ""
+  },
+  "verifier.py": {
+    "mtime": 1795651834.7423875,
+    "seen": 1795652023.2497475,
+    "ast_hash": "02bc28570c8a8bc35f9eae8979b7c904",
+    "semantic_hash": ""
+  },
+  "DESIGN.md": {
+    "mtime": 1795651931.8879426,
+    "seen": 1795652023.2497485,
+    "ast_hash": "0ea5392cb55ad7f32e69af81426ab3b1",
+    "semantic_hash": ""
+  },
+  "PRESENTATION_HANDOFF.md": {
+    "mtime": 1795651834.7400246,
+    "seen": 1795652023.2497504,
+    "ast_hash": "b86f5b9a21713eea818894870ae3f214",
+    "semantic_hash": ""
+  },
+  "README.md": {
+    "mtime": 1795651834.7400246,
+    "seen": 1795652023.2497518,
+    "ast_hash": "7c3bd99542c605f528f30e6c0bb07dfe",
+    "semantic_hash": ""
+  },
+  "docs/slides/index.html": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.2497528,
+    "ast_hash": "a0303c7a4e46f5b90aeaf6b86ebd4471",
+    "semantic_hash": ""
+  },
+  "requirements.txt": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.249754,
+    "ast_hash": "0dfb3b627ddbab2fa58540dba58c8a53",
+    "semantic_hash": ""
+  },
+  "docs/slides/img/dealguard-demo.jpg": {
+    "mtime": 1795651834.7412183,
+    "seen": 1795652023.249755,
+    "ast_hash": "7480d9b8dda66b294640f3f1505f4386",
+    "semantic_hash": ""
+  },
+  "docs/slides/img/qr.png": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.249756,
+    "ast_hash": "d54d51b9f89e24be3d3ca162d2186220",
+    "semantic_hash": ""
+  },
+  "docs/slides/img/sdaia-academy.png": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.2497573,
+    "ast_hash": "48641d38a1cd80273784cbd6109ff922",
+    "semantic_hash": ""
+  },
+  "docs/slides/img/sdaia.png": {
+    "mtime": 1795651834.742187,
+    "seen": 1795652023.2497582,
+    "ast_hash": "432ec554f71e7deb05e575e21818ddcf",
+    "semantic_hash": ""
+  },
+  ".mcp.json": {
+    "mtime": 1795652034.0480964,
+    "seen": 1795652146.7710931,
+    "ast_hash": "1f727cac4dc789daac94290288ac6785",
+    "semantic_hash": ""
+  },
+  "scripts/setup-tooling.sh": {
+    "mtime": 1795652136.5304055,
+    "seen": 1795652146.7711158,
+    "ast_hash": "ddd6a61478c82ebbf967629bdd7b4dec",
+    "semantic_hash": ""
+  },
+  "CLAUDE.md": {
+    "mtime": 1795652141.8784058,
+    "seen": 1795652146.7711267,
+    "ast_hash": "824d1ccdb2b2faf18407d03819fe156e",
+    "semantic_hash": ""
+  }
+}

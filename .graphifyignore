@@ -1,0 +1,4 @@
+.claude/
+.playwright-cli/
+graphify-out/
+screenshots/
