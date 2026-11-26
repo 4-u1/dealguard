@@ -3,7 +3,7 @@
 ## Before any UI work
 - Read `DESIGN.md` (Stripe-inspired design system) and follow it.
 - Use the skills in `.claude/skills/`: `design-taste-frontend`, `impeccable`, `web-design-guidelines`,
-  `image-to-code` / `imagegen-frontend-web`, `21st-ui`. For a UI review run `/web-interface-guidelines`
+  `image-to-code` / `imagegen-frontend-web`, `21st-ui` (21st.dev is reached through the claude.ai connector, tools `mcp__Make__*`). For a UI review run `/web-interface-guidelines`
   or ask "Review my UI".
 - Verify pages in a real browser with `playwright-cli` (skill) or the `playwright` MCP server.
 
@@ -21,7 +21,7 @@
 
 ## API keys
 Keys live only as environment Network secrets (proxy-injected): `openrouter.ai`, `api.elevenlabs.io`,
-`21st.dev`. Never write real keys to files; tools get the placeholder `proxy-injected`.
+`21st.dev` (unused: the connector replaces it). Never write real keys to files; tools get the placeholder `proxy-injected`.
 Node tools need `NODE_USE_ENV_PROXY=1` to reach the network.
 - FreeLLMAPI: start with `FREEAPI_CONFIG_PATH=../tools/freellmapi.config.json NODE_USE_ENV_PROXY=1 npm run dev`;
   use an explicit model (e.g. `nemotron-3.5-lightning`), since `auto` may hit stale free-model entries.
