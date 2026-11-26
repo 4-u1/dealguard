@@ -33,6 +33,11 @@ Node tools need `NODE_USE_ENV_PROXY=1` to reach the network.
   `ghcr.io/usestrix/strix-sandbox` (pulled on first run).
 - Run: `STRIX_LLM="openrouter/<free tool-capable model>" LLM_API_KEY=proxy-injected strix -n -t ./ -m quick`.
   Results land in `strix_runs/` (git-ignored).
+- Shannon (`shannon` skill): `bash scripts/shannon.sh --validate-model` (preflight only) or
+  `bash scripts/shannon.sh` (full pentest of a local DealGuard copy, ~1-1.5h). Ask the user to confirm
+  authorization before a full run. Docker workers have no egress here, so `scripts/llm-relay.mjs` forwards
+  model calls to OpenRouter. Output in `.shannon/` (git-ignored).
+- `security-audit` skill (Cloudflare): source-first manual review; guidance by default, full audit only on request.
 
 ## Tests
 `python -m pytest -q`

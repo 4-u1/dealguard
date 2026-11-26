@@ -39,3 +39,4 @@ Thumbs.db
 .playwright-cli/
 graphify-out/cache/
 strix_runs/
+.shannon/
