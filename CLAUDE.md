@@ -26,5 +26,13 @@ Node tools need `NODE_USE_ENV_PROXY=1` to reach the network.
 - FreeLLMAPI: start with `FREEAPI_CONFIG_PATH=../tools/freellmapi.config.json NODE_USE_ENV_PROXY=1 npm run dev`;
   use an explicit model (e.g. `nemotron-3.5-lightning`), since `auto` may hit stale free-model entries.
 
+## Security testing (Strix)
+- Skills: `penetration-testing-with-strix`, `find-security-vulnerabilities-in-code`, `web-app-penetration-testing`,
+  `api-security-testing`, `owasp-top-10-testing`, `fix-security-vulnerabilities-with-strix`, and more.
+- Only scan targets we own (this repo, local servers). Needs Docker (`dockerd`) + sandbox image
+  `ghcr.io/usestrix/strix-sandbox` (pulled on first run).
+- Run: `STRIX_LLM="openrouter/<free tool-capable model>" LLM_API_KEY=proxy-injected strix -n -t ./ -m quick`.
+  Results land in `strix_runs/` (git-ignored).
+
 ## Tests
 `python -m pytest -q`

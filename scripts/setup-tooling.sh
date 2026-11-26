@@ -9,6 +9,9 @@ export PATH="$HOME/.local/bin:$PATH"
 
 command -v graphify-mcp >/dev/null || uv tool install 'graphifyy[mcp]'
 command -v playwright-cli >/dev/null || npm install -g @playwright/cli@latest
+command -v strix >/dev/null || uv tool install strix-agent
+# Strix needs a running Docker daemon and its sandbox image
+docker info >/dev/null 2>&1 || { (nohup dockerd >/tmp/dockerd.log 2>&1 &); for _ in $(seq 1 20); do docker info >/dev/null 2>&1 && break; sleep 1; done; }
 graphify update . >/dev/null && echo "graphify graph rebuilt -> graphify-out/"
 
 if [[ "${1:-}" == "--all" ]]; then

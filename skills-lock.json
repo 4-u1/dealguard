@@ -1,12 +1,36 @@
 {
   "version": 2,
   "skills": {
+    "api-security-testing": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/api-security-testing/SKILL.md",
+      "computedHash": "32f365479f3446fff784b2ccc48b5115cd06e27be980de90824638779d78c48b",
+      "installMode": "copy"
+    },
+    "application-security-testing": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/application-security-testing/SKILL.md",
+      "computedHash": "28c343b8c5cf3dd8daf7dda199d387761132b80f47648eb8aeb08502e158c446",
+      "installMode": "copy"
+    },
     "brandkit": {
       "source": "Leonxlnx/imagegen-skills",
       "commit": "beb16b0d0f4dae9a6f5cb04ea41e97b93a54ab8e",
       "sourceType": "github",
       "skillPath": "skills/brandkit/SKILL.md",
       "computedHash": "f1db92e99b2c038fb9df1aa8c2307764c9d012185b8c9e19fcd026a187459d20",
+      "installMode": "copy"
+    },
+    "ci-security-scanning-with-strix": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/ci-security-scanning-with-strix/SKILL.md",
+      "computedHash": "13949ab1e24f8cac87a11b221e55e52e6bfcf712ccd9eaeefeae4e3608c70d44",
       "installMode": "copy"
     },
     "deploy-to-vercel": {
@@ -23,6 +47,22 @@
       "sourceType": "github",
       "skillPath": "skills/taste-skill/SKILL.md",
       "computedHash": "b10eab0a9684cd09cf34c31ef04a3bf530a5f4404422f9c520d42372d670c7fc",
+      "installMode": "copy"
+    },
+    "find-security-vulnerabilities-in-code": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/find-security-vulnerabilities-in-code/SKILL.md",
+      "computedHash": "d9ea567e93b8add3991b0c43c1b9f3ea604c6c53e0f88ef4bcec3be9e616efac",
+      "installMode": "copy"
+    },
+    "fix-security-vulnerabilities-with-strix": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/fix-security-vulnerabilities-with-strix/SKILL.md",
+      "computedHash": "7febe815c271b39c688d583efef9a4f9674eaed063264f7218c7c67aacbd7abe",
       "installMode": "copy"
     },
     "image-to-code": {
@@ -55,6 +95,30 @@
       "sourceType": "github",
       "skillPath": ".agents/skills/impeccable/SKILL.md",
       "computedHash": "b89bce2429b2b581d38620af9b555e2b4762b12f6f4f61fb07fba7757a284b3e",
+      "installMode": "copy"
+    },
+    "managed-pentesting-with-strix": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/managed-pentesting-with-strix/SKILL.md",
+      "computedHash": "e7f6a0c7f4c7fece66e138e8b61648d75d91806b8b7a0141f25a6408f00ea43a",
+      "installMode": "copy"
+    },
+    "owasp-top-10-testing": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/owasp-top-10-testing/SKILL.md",
+      "computedHash": "dc3518dd62ce6b048dad7a969adfe88ea8e4d8bb8fd9c8a1627b443c8a508996",
+      "installMode": "copy"
+    },
+    "penetration-testing-with-strix": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/penetration-testing-with-strix/SKILL.md",
+      "computedHash": "54ba2e5fabb69e319421fdf6c8bdbd43650b66d0ed592b920f57e60e25d9e809",
       "installMode": "copy"
     },
     "vercel-cli-with-tokens": {
@@ -103,6 +167,14 @@
       "sourceType": "github",
       "skillPath": "skills/react-view-transitions/SKILL.md",
       "computedHash": "d5bdffc1f132ae0d6d9260c260ae206d48cd83cb148e3e3b75fc1a3b94b249fa",
+      "installMode": "copy"
+    },
+    "web-app-penetration-testing": {
+      "source": "usestrix/strix",
+      "commit": "9ed84f99c8f13fc921baebc59e0c696108cfab3e",
+      "sourceType": "github",
+      "skillPath": "skills/web-app-penetration-testing/SKILL.md",
+      "computedHash": "12d42989bda70f680c0c7b60aa8882f635d59aa7bc24e76eb78cbdf63085cba7",
       "installMode": "copy"
     },
     "web-design-guidelines": {

@@ -38,3 +38,4 @@ Thumbs.db
 # Playwright CLI output (may contain credentials)
 .playwright-cli/
 graphify-out/cache/
+strix_runs/
